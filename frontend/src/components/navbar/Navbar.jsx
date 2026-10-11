@@ -5,7 +5,7 @@ export default function Navbar() {
   const { theme, setTheme, themeStyles } = useTheme();
 
   const links = [
-    { to: '/', label: 'To-Do' },
+    { to: '/', label: 'Tasks' },
     { to: '/stopwatch', label: 'Stopwatch' },
     { to: '/timer', label: 'Timer' },
     { to: '/notepad', label: 'Notes' },
@@ -37,6 +37,7 @@ export default function Navbar() {
           </div>
 
           <select
+            aria-label="Color theme"
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
             className="text-xs px-2 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 bg-transparent cursor-pointer font-medium focus:outline-none"

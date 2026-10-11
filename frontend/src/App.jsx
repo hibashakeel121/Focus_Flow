@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { TimerProvider } from "./context/TimerContext";
 import Navbar from "./components/navbar/Navbar";
@@ -11,10 +11,10 @@ import WordCounterPage from "./pages/WordCounterPage";
 import CalculatorPage from "./pages/CalculatorPage";
 
 function AppContent() {
-  const { themeStyles } = useTheme();
+  const { theme, themeStyles } = useTheme();
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${themeStyles?.bg || ''}`}>
+    <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'dark' : ''} ${themeStyles?.bg || ''}`}>
       <Navbar />
       <main className="max-w-2xl mx-auto p-4 mt-6">
         <Routes>

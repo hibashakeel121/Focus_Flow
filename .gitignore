@@ -1,4 +1,7 @@
 # Logs
+.env
+.env.*
+!.env.example
 logs
 *.log
 npm-debug.log*
@@ -8,6 +11,11 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.npm-cache
+backend/.cache
+backend/.data
+playwright-report
+test-results
 dist
 dist-ssr
 *.local

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+﻿import { createContext, useContext, useState, useEffect } from "react";
 
 const TimerContext = createContext();
 
@@ -52,12 +52,6 @@ export function TimerProvider({ children }) {
     setTmIsActive(false);
   };
 
-  // --- IN-MEMORY TODOS ---
-  const [todos, setTodos] = useState([]);
-  const addTodo = (text) => setTodos((prev) => [...prev, { id: Date.now(), text, completed: false }]);
-  const toggleTodo = (id) => setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)));
-  const deleteTodo = (id) => setTodos((prev) => prev.filter((t) => t.id !== id));
-
   // --- IN-MEMORY HABITS ---
   const [habits, setHabits] = useState([]);
   const addHabit = (name) => setHabits((prev) => [...prev, { id: Date.now(), name, streak: 0, completedToday: false }]);
@@ -75,43 +69,6 @@ export function TimerProvider({ children }) {
     );
   const deleteHabit = (id) => setHabits((prev) => prev.filter((h) => h.id !== id));
 
-  // --- IN-MEMORY MULTIPLE NOTES ---
-  const [notes, setNotes] = useState([
-    { id: 1, title: "Quick Note", content: "" }
-  ]);
-  const [activeNoteId, setActiveNoteId] = useState(1);
-
-  const addNote = () => {
-    const newNote = {
-      id: Date.now(),
-      title: `Note ${notes.length + 1}`,
-      content: ""
-    };
-    setNotes((prev) => [...prev, newNote]);
-    setActiveNoteId(newNote.id);
-  };
-
-  const updateNote = (id, content) => {
-    setNotes((prev) =>
-      prev.map((note) => (note.id === id ? { ...note, content } : note))
-    );
-  };
-
-  const updateNoteTitle = (id, title) => {
-    setNotes((prev) =>
-      prev.map((note) => (note.id === id ? { ...note, title } : note))
-    );
-  };
-
-  const deleteNote = (id) => {
-    if (notes.length === 1) return; // keep at least one note
-    const filtered = notes.filter((n) => n.id !== id);
-    setNotes(filtered);
-    if (activeNoteId === id) {
-      setActiveNoteId(filtered[0].id);
-    }
-  };
-
   return (
     <TimerContext.Provider
       value={{
@@ -127,21 +84,10 @@ export function TimerProvider({ children }) {
         toggleTm,
         resetTm,
         updateTmInitial,
-        todos,
-        addTodo,
-        toggleTodo,
-        deleteTodo,
         habits,
         addHabit,
         toggleHabit,
         deleteHabit,
-        notes,
-        activeNoteId,
-        setActiveNoteId,
-        addNote,
-        updateNote,
-        updateNoteTitle,
-        deleteNote,
       }}
     >
       {children}
