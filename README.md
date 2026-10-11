@@ -131,6 +131,8 @@ The screenshot script tests adding tasks, saved completion after refreshing, and
 
 ## Production
 
+For GitHub upload and Vercel hosting, follow [DEPLOYMENT.md](DEPLOYMENT.md). Import the repository root so the React frontend and Express API deploy together, and configure `MONGODB_URI` in Vercel.
+
 Run `npm.cmd run build`, then set `NODE_ENV=production` and `MONGODB_URI` in `backend/.env.production` or the server environment. Run `npm.cmd start`. Express serves `frontend/dist` and the API from the same origin. The optional local database launcher is development tooling; configure your normal MongoDB server for production.
 
 This is a shared classroom app without user accounts. Every visitor using the same backend sees the same tasks. Habits remain in memory; task and note storage use MongoDB.

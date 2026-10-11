@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import Note from './models/Note.js';
 import Task from './models/Task.js';
 
-export function createApp() {
+export function createApp({ serveFrontend = process.env.NODE_ENV === 'production' } = {}) {
   const app = express();
   app.disable('x-powered-by');
   app.use(express.json({ limit: '1mb' }));
@@ -82,7 +82,7 @@ export function createApp() {
   });
 
   app.use('/api', (_req, res) => res.status(404).json({ message: 'API route not found.' }));
-  if (process.env.NODE_ENV === 'production') {
+  if (serveFrontend) {
     const dist = fileURLToPath(new URL('../frontend/dist/', import.meta.url));
     app.use(express.static(dist));
     app.get('/{*path}', (_req, res) => res.sendFile(path.join(dist, 'index.html')));
