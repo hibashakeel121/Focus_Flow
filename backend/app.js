@@ -7,6 +7,10 @@ import Task from './models/Task.js';
 
 export function createApp({ serveFrontend = process.env.NODE_ENV === 'production' } = {}) {
   const app = express();
+  app.use(cors()); // 2. Add this line right here to enable CORS for all origins (or pass configuration options)
+
+  app.disable('x-powered-by');
+  app.use(express.json({ limit: '1mb' }));
   app.disable('x-powered-by');
   app.use(express.json({ limit: '1mb' }));
   app.get('/api/health', (_req, res) => {
