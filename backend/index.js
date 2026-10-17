@@ -5,7 +5,9 @@ import { createApp } from './app.js';
 mongoose.set('bufferCommands', false);
 const port = Number(process.env.PORT || 5000);
 try {
-  await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/student_task_manager', { serverSelectionTimeoutMS: 5000 });
+  await mongoose.connect(process.env.MONGODB_URI, {
+  serverSelectionTimeoutMS: 10000
+});
   const server = createApp().listen(port, () => console.log(`API running at http://localhost:${port}`));
   server.on('error', async (error) => {
     console.error(`Server failed: ${error.code || error.name}`);
